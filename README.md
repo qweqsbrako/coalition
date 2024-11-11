@@ -1,66 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Here's a `README.md` file that explains how to set up and use the product inventory management system you requested. This README provides all the necessary instructions for installation, configuration, and usage.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# Product Inventory Management System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is a simple product inventory management system built with **Laravel**, **PHP**, **AJAX**, and **Bootstrap**. The application allows users to add, view, update, and calculate the total value of products based on their quantity and price. The data is stored in a `JSON` file.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Add products with name, quantity, and price.
+- Automatically calculate the total value of products.
+- Edit product details inline in the table.
+- View all submitted data in a table, with the total sum at the bottom.
+- Data stored in a `JSON` file.
 
-## Learning Laravel
+## Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Before getting started, make sure you have the following installed:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP >= 8.x
+- Composer (for managing PHP dependencies)
+- Laravel >= 9.x
+- A web server (Apache/Nginx or use Laravel’s built-in development server)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+1. **Clone the repository:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   Clone this repository to your local machine:
 
-### Premium Partners
+   ```bash
+   git clone https://github.com/qweqsbrako/coalition-laravel.git
+   cd coalition-laravel
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. **Install dependencies:**
 
-## Contributing
+   Use Composer to install all the PHP dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   composer install
+   ```
 
-## Code of Conduct
+3. **Set up your environment:**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   Copy the `.env.example` file to `.env`:
 
-## Security Vulnerabilities
+   ```bash
+   cp .env.example .env
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   Then, generate the application key:
 
-## License
+   ```bash
+   php artisan key:generate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Create the `data.json` file:**
+
+   Inside the `storage` directory, create a file named `data.json`:
+
+   ```bash
+   touch storage/app/public/data.json 
+   ```
+   and run php artisan storage:link to make the json file accessible from the web
+
+   Ensure that the `storage` directory and `data.json` file are writable by the web server:
+
+   ```bash
+   chmod -R 775 storage
+   chmod 664 storage/data.json
+   ```
+
+5. **Run the Laravel development server:**
+
+   Start the server using Artisan:
+
+   ```bash
+   php artisan serve
+   ```
+
+   This will start the application on `http://localhost:8000`.
+
+## Usage
+
+Once the server is running, you can access the application in your browser:
+
+- **Home Page:** `http://localhost:8000`
+  - This page displays a form to add products, as well as a table showing all products added.
+  
+### Add Products
+
+- Enter the **Product Name**, **Quantity in Stock**, and **Price per Item**.
+- Click the **Submit** button to add the product to the inventory.
+- After submission, the product will be displayed in a table with its calculated **Total Value** (Quantity * Price per Item).
+  
+### Edit Products
+
+- You can edit any of the product details directly in the table by clicking on the cell.
+- After editing, click the **update** button to save the changes.
+
+### View Total Value
+
+- The table will show the **Grand Total** of all products at the bottom, which is the sum of the total values of all products.
+  
+## How it Works
+
+1. **Submitting Data:**
+   - When a user submits the form, an AJAX request is made to `/store`.
+   - The product data is added to `data.json`.
+   - A loader is shown until the request is completed.
+
+2. **Loading Data:**
+   - When the page is loaded, an AJAX GET request is made to `/load-data` to fetch and display all the products.
+
+3. **Editing Data:**
+   - Inline editing is enabled for product name, quantity, and price.
+   - When the **Save** button is clicked, an AJAX POST request is made to `/update/{id}` to save the changes.
+
+4. **Grand Total Calculation:**
+   - The total value for each product is calculated as `Quantity * Price`.
+   - The grand total is displayed at the bottom of the table.
